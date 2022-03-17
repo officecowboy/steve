@@ -8,7 +8,7 @@ body {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 36px;
 }
 
 .container {
@@ -27,15 +27,49 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-evenly;
   flex-direction: space-evenly;
+  align-self: center;
+  justify-self: center;
 }
 
-.app {
+.app-img {
   max-width: 150px;
   max-height: 150px;
 }
 
-.app-box-single {
+.app {
   position: relative;
+}
+
+.app:hover {
+  cursor: pointer;
+}
+
+.start {
+  font-family: Apple-Garamond-Light;
+  font-size: 36px;
+  border: 3px solid black;
+  padding: 5px 15px;
+  background-color: white;
+  height: 60px;
+}
+
+.score {
+  height: 60px;
+  display: none;
+  vertical-align: top;
+}
+
+.bottom-text {
+  display: flex;
+  justify-content: center;
+  flex-direction: center;
+  height: 70px;
+}
+
+.start:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 .circle {
@@ -49,10 +83,32 @@ h1 {
   right: -25%;
   -webkit-transform: translate(-50%, -50%); /* iOS */
   transform: translate(-50%, -50%);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 24px;
   color: white;
 }
+
+.sounds {
+  display: none;
+}
+
+.command {
+  display: none;
+}
+
+.title {
+  display: initial;
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
