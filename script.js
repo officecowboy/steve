@@ -133,7 +133,7 @@ function nextRound() {
     clearNotifications()
     title.innerHTML = 'Go'
     appContainer.classList.remove('blocked')
-  }, score * 1000 + 2000)
+  }, score * 1000 + 1000)
 
 }
 
