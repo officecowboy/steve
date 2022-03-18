@@ -13,6 +13,17 @@ let userArr = []
 
 scoreTally.innerHTML = level
 
+function resetGame() {
+  level = 0
+  arr = []
+  userArr = []
+  for (let k = 0; k < circles.length; k++) {
+    circles[k].style.display = 'none'
+  }
+  startButton.style.display = 'initial'
+  command.innerHTML = 'Game Over'
+  score.style.display = 'none'
+}
 
 function newGame() {
   startButton.style.display = 'none'
@@ -34,6 +45,8 @@ function steveRound() {
 
   for (let k = 0; k < circles.length; k++) {
     circles[k].style.display = 'none'
+    circles[k].innerHTML = ''
+    console.log(circles[k].innerHTML)
   }
 
   command.innerHTML = 'Wait'
@@ -46,21 +59,25 @@ function steveRound() {
       if (circle.style.display !== 'flex') {
         circle.dataset.num = 1
         circle.innerHTML = circle.dataset.num
+        console.log(circle.innerHTML)
         circle.style.display = 'flex'
       }
       else {
         circle.innerHTML = parseInt(circle.dataset.num) + 1
         circle.dataset.num = circle.innerHTML
+        console.log(circle.innerHTML)
       }
     }, 1500 * (i + 1));
   }
 
 }
 
+
 function userRound() {
 
   for (let k = 0; k < circles.length; k++) {
     circles[k].style.display = 'none'
+    circles[k].innerHTML = ''
   }
 
   command.innerHTML = 'Go'
@@ -80,18 +97,27 @@ function userRound() {
         circle.dataset.num = 1
         circle.innerHTML = circle.dataset.num
         circle.style.display = 'flex'
+        console.log(circle.innerHTML)
       }
       else {
         circle.innerHTML = parseInt(circle.dataset.num) + 1
         circle.dataset.num = circle.innerHTML
+        console.log(circle.innerHTML)
       }
 
       for (m = 0; m < userArr.length; m++) {
         if (userArr[m] !== arr[m]) {
-          console.log("Game over!")
+          resetGame()
+        }
+        else if (userArr[m] == arr[m] && userArr.length === arr.length) {
+          command.innerHTML = "Success!"
+          userArr = []
+          console.log(userArr)
+          setTimeout(() => {
+            nextRound();
+          }, 1000);
         }
       }
-
     })
 
 
