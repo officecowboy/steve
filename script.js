@@ -5,6 +5,7 @@ const startButton = document.querySelector('.start')
 const command = document.querySelector('.command')
 const score = document.querySelector('.score')
 const steve = document.querySelector('.title')
+let circles = document.querySelectorAll('.circle')
 let scoreTally = document.querySelector('.score-tally')
 let level = 0
 let arr = []
@@ -31,6 +32,12 @@ function nextPing() {
 
 function steveRound() {
 
+  for (let k = 0; k < circles.length; k++) {
+    circles[k].style.display = 'none'
+  }
+
+  command.innerHTML = 'Wait'
+
   for (let i = 0; i < arr.length; i++) {
     setTimeout(() => {
       document.querySelector(`[data-sound='${arr[i]}']`).play()
@@ -51,6 +58,12 @@ function steveRound() {
 }
 
 function userRound() {
+
+  for (let k = 0; k < circles.length; k++) {
+    circles[k].style.display = 'none'
+  }
+
+  command.innerHTML = 'Go'
 
   appContainer.classList.remove('blocked')
 
@@ -86,7 +99,9 @@ function nextRound() {
   arr.push(nextPing())
 
   steveRound()
-  setTimeout(userRound(), level * 1500 + 1500)
+  setTimeout(() => {
+    userRound();
+  }, level * 1500 + 2000);
 }
 
 
