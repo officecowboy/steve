@@ -2,9 +2,8 @@
 const app = document.querySelectorAll('.js-app')
 const appContainer = document.querySelector('.app-box')
 const startButton = document.querySelector('.start')
-const command = document.querySelector('.command')
+const title = document.querySelector('.title')
 const score = document.querySelector('.score')
-const steve = document.querySelector('.title')
 let circles = document.querySelectorAll('.circle')
 let scoreTally = document.querySelector('.score-tally')
 let level = 0
@@ -19,20 +18,19 @@ function resetGame() {
   userArr = []
   for (let k = 0; k < circles.length; k++) {
     circles[k].style.display = 'none'
+    circles[k].innerHTML = ''
+    circles[k].dataset.num = ''
   }
   startButton.style.display = 'initial'
-  command.innerHTML = 'Game Over'
+  title.innerHTML = 'Game Over'
   score.style.display = 'none'
 }
 
 function newGame() {
   startButton.style.display = 'none'
-  steve.style.display = 'none'
-  command.style.display = 'initial'
   score.style.display = 'initial'
+  title.innerHTML = 'Wait'
 }
-
-
 
 function nextPing() {
   const apps = ['instagram', 'facebook', 'twitter', 'tiktok'];
@@ -40,33 +38,32 @@ function nextPing() {
   return randomApp;
 }
 
+function selectApp(x) {
+  document.querySelector(`[data-sound='${x}']`).play()
+
+  for (let j = 0; j < circles.length; j++) {
+    if (circles[j].dataset.ping == `${x}`) {
+      if (circles[j].style.display !== 'flex') {
+        circles[j].dataset.num = 1
+        circles[j].innerHTML = circles[j].dataset.num
+        circles[j].style.display = 'flex'
+      }
+      else {
+        circles[j].innerHTML = parseInt(circles[j].dataset.num) + 1
+        circles[j].dataset.num = circles[j].innerHTML
+      }
+    }
+  }
+}
+
 
 function steveRound() {
 
-  for (let k = 0; k < circles.length; k++) {
-    circles[k].style.display = 'none'
-    circles[k].innerHTML = ''
-    console.log(circles[k].innerHTML)
-  }
-
-  command.innerHTML = 'Wait'
+  title.innerHTML = 'Wait'
 
   for (let i = 0; i < arr.length; i++) {
     setTimeout(() => {
-      document.querySelector(`[data-sound='${arr[i]}']`).play()
-      let circle = document.querySelector(`[data-ping='${arr[i]}']`)
-
-      if (circle.style.display !== 'flex') {
-        circle.dataset.num = 1
-        circle.innerHTML = circle.dataset.num
-        console.log(circle.innerHTML)
-        circle.style.display = 'flex'
-      }
-      else {
-        circle.innerHTML = parseInt(circle.dataset.num) + 1
-        circle.dataset.num = circle.innerHTML
-        console.log(circle.innerHTML)
-      }
+      selectApp(arr[i])
     }, 1500 * (i + 1));
   }
 
@@ -78,9 +75,10 @@ function userRound() {
   for (let k = 0; k < circles.length; k++) {
     circles[k].style.display = 'none'
     circles[k].innerHTML = ''
+    circles[k].dataset.num = ''
   }
 
-  command.innerHTML = 'Go'
+  title.innerHTML = 'Go'
 
   appContainer.classList.remove('blocked')
 
@@ -90,46 +88,42 @@ function userRound() {
       let choice = app[i].dataset.apps
       userArr.push(choice)
 
-      document.querySelector(`[data-sound='${choice}']`).play()
-      let circle = document.querySelector(`[data-ping='${choice}']`)
-
-      if (circle.style.display !== 'flex') {
-        circle.dataset.num = 1
-        circle.innerHTML = circle.dataset.num
-        circle.style.display = 'flex'
-        console.log(circle.innerHTML)
-      }
-      else {
-        circle.innerHTML = parseInt(circle.dataset.num) + 1
-        circle.dataset.num = circle.innerHTML
-        console.log(circle.innerHTML)
-      }
+      selectApp(choice)
 
       for (m = 0; m < userArr.length; m++) {
         if (userArr[m] !== arr[m]) {
           resetGame()
+          return
         }
+
         else if (userArr[m] == arr[m] && userArr.length === arr.length) {
-          command.innerHTML = "Success!"
+          title.innerHTML = "Success!"
           userArr = []
           console.log(userArr)
           setTimeout(() => {
             nextRound();
           }, 1000);
+          return
         }
       }
+
     })
-
-
   }
 
 }
+
+
 
 function nextRound() {
 
   level += 1
   scoreTally.innerHTML = level
   appContainer.classList.add('blocked')
+  for (let k = 0; k < circles.length; k++) {
+    circles[k].style.display = 'none'
+    circles[k].innerHTML = ''
+    circles[k].dataset.num = ''
+  }
   arr.push(nextPing())
 
   steveRound()
@@ -138,7 +132,6 @@ function nextRound() {
   }, level * 1500 + 2000);
 
 }
-
 
 
 startButton.addEventListener("click", function () {
