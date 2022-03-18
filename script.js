@@ -14,16 +14,19 @@ scoreTally.innerHTML = score
 
 
 startButton.addEventListener("click", function () {
+  appContainer.classList.remove('blocked')
   newGame()
   nextRound()
 })
 
 for (let i = 0; i < app.length; i++) {
   app[i].addEventListener("click", function () {
+    app[i].classList.add('activated')
     let choice = app[i].dataset.apps
     selectApp(choice)
     userArr.push(choice)
     userRound()
+    setTimeout(() => { app[i].classList.remove('activated') }, 300)
   })
 }
 
