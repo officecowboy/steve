@@ -103,6 +103,10 @@ h1 {
   display: initial;
 }
 
+.blocked {
+  pointer-events: none;
+}
+
 @keyframes zoom-in {
   0% {
     transform: scale(0);
