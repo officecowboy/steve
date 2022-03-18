@@ -14,7 +14,7 @@ let userArr = []
 scoreTally.innerHTML = level
 
 
-function startGame() {
+function newGame() {
   startButton.style.display = 'none'
   steve.style.display = 'none'
   command.style.display = 'initial'
@@ -86,7 +86,15 @@ function userRound() {
         circle.dataset.num = circle.innerHTML
       }
 
+      for (m = 0; m < userArr.length; m++) {
+        if (userArr[m] !== arr[m]) {
+          console.log("Game over!")
+        }
+      }
+
     })
+
+
   }
 
 }
@@ -102,12 +110,13 @@ function nextRound() {
   setTimeout(() => {
     userRound();
   }, level * 1500 + 2000);
+
 }
 
 
 
 startButton.addEventListener("click", function () {
-  setTimeout(() => { startGame() }, 200);
+  setTimeout(() => { newGame() }, 200);
   nextRound()
 })
 
