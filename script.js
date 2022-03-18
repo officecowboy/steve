@@ -12,8 +12,9 @@ let userArr = []
 
 scoreTally.innerHTML = score
 
+
 startButton.addEventListener("click", function () {
-  setTimeout(() => { newGame() }, 200)
+  newGame()
   nextRound()
 })
 

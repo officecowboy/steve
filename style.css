@@ -11,6 +11,14 @@ h1 {
   font-size: 36px;
 }
 
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
 .container {
   display: flex;
   height: 100vh;
@@ -48,13 +56,11 @@ h1 {
   font-family: Apple-Garamond-Light;
   font-size: 36px;
   border: 3px solid black;
-  padding: 5px 15px;
+  padding: 3px 15px 5px 15px;
   background-color: white;
-  height: 60px;
 }
 
 .score {
-  height: 60px;
   display: none;
   vertical-align: top;
 }
@@ -62,7 +68,7 @@ h1 {
 .bottom-text {
   display: flex;
   justify-content: center;
-  flex-direction: center;
+  flex-direction: column;
   height: 70px;
 }
 
@@ -116,3 +122,22 @@ h1 {
   }
 }
 
+@media (max-width: 700px) {
+
+  .app-box {
+    width: 280px;
+    height: 250px;
+  }
+
+  .app-img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .circle {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+  }
+
+}
