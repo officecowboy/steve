@@ -1,9 +1,9 @@
-
 const app = document.querySelectorAll('.js-app')
 const appContainer = document.querySelector('.app-box')
 const startButton = document.querySelector('.start')
 const title = document.querySelector('.title')
 const footer = document.querySelector('.score')
+const gameOver = document.querySelector('#gameover')
 let circles = document.querySelectorAll('.circle')
 let scoreTally = document.querySelector('.score-tally')
 let score = 0
@@ -12,17 +12,35 @@ let userArr = []
 
 scoreTally.innerHTML = score
 
+startButton.addEventListener("click", function () {
+  setTimeout(() => { newGame() }, 200)
+  nextRound()
+})
+
+for (let i = 0; i < app.length; i++) {
+  app[i].addEventListener("click", function () {
+    let choice = app[i].dataset.apps
+    selectApp(choice)
+    userArr.push(choice)
+    userRound()
+  })
+}
+
 function resetGame() {
+
   score = 0
   arr = []
   userArr = []
+
   for (let k = 0; k < circles.length; k++) {
     circles[k].style.display = 'none'
     circles[k].innerHTML = ''
     circles[k].dataset.num = ''
   }
+
   startButton.style.display = 'initial'
   title.innerHTML = 'Game Over'
+  gameOver.play()
   footer.style.display = 'none'
 }
 
@@ -30,6 +48,14 @@ function newGame() {
   startButton.style.display = 'none'
   footer.style.display = 'initial'
   title.innerHTML = 'Wait'
+}
+
+function clearNotifications() {
+  for (let k = 0; k < circles.length; k++) {
+    circles[k].style.display = 'none'
+    circles[k].innerHTML = ''
+    circles[k].dataset.num = ''
+  }
 }
 
 function nextPing() {
@@ -66,7 +92,7 @@ function steveRound() {
   for (let i = 0; i < arr.length; i++) {
     setTimeout(() => {
       selectApp(arr[i])
-    }, 1500 * (i + 1));
+    }, 1000 * (i + 1));
   }
 
 }
@@ -74,39 +100,17 @@ function steveRound() {
 
 function userRound() {
 
-  for (let k = 0; k < circles.length; k++) {
-    circles[k].style.display = 'none'
-    circles[k].innerHTML == ''
-    circles[k].dataset.num == ''
+  let index = userArr.length - 1;
+
+  if (userArr[index] !== arr[index]) {
+    resetGame()
+    return
   }
 
-  title.innerHTML = 'Go'
-
-  appContainer.classList.remove('blocked')
-
-  for (let n = 0; n < app.length; n++) {
-    app[n].addEventListener("click", function () {
-
-      userArr.push(app[n].dataset.apps)
-      let index = userArr.length - 1;
-      console.log(app[n].dataset.apps)
-
-      selectApp(app[n].dataset.apps)
-
-      if (userArr[index] !== arr[index]) {
-        setTimeout(() => { resetGame() }, 1000);
-        return
-      }
-
-      if (userArr[index] === arr[index] && userArr.length === arr.length) {
-        title.innerHTML = "Success!"
-        userArr = []
-        console.log(userArr)
-        setTimeout(() => { nextRound() }, 1000);
-        return
-      }
-
-    })
+  if (userArr[index] === arr[index] && userArr.length === arr.length) {
+    title.innerHTML = "Success!"
+    setTimeout(() => { nextRound() }, 1000);
+    return
   }
 
 }
@@ -116,22 +120,16 @@ function nextRound() {
 
   score += 1
   scoreTally.innerHTML = score
+  userArr = []
   appContainer.classList.add('blocked')
-  for (let k = 0; k < circles.length; k++) {
-    circles[k].style.display = 'none'
-    circles[k].innerHTML = ''
-    circles[k].dataset.num = ''
-  }
+  clearNotifications()
   arr.push(nextPing())
-
   steveRound()
-  setTimeout(() => { userRound() }, score * 1500 + 2000);
+  setTimeout(() => {
+    clearNotifications()
+    title.innerHTML = 'Go'
+    appContainer.classList.remove('blocked')
+  }, score * 1000 + 2000)
 
 }
-
-
-startButton.addEventListener("click", function () {
-  setTimeout(() => { newGame() }, 200);
-  nextRound()
-})
 
