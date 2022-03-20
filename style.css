@@ -123,12 +123,25 @@ img {
   background-color: black;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   color: white;
   font-size: 24px;
   padding: 0px 20px;
   text-align: center;
+}
+
+.intro a {
+  color: white;
+}
+
+.intro-text {
+  max-width: 650px;
+  padding-top: 280px;
+}
+
+.intro-cta {
+  padding-bottom: 300px;
 }
 
 .fullwhiteapple {
@@ -192,6 +205,32 @@ img {
     width: 34px;
     height: 34px;
     font-size: 20px;
+  }
+
+  .intro-text {
+    max-width: 650px;
+    padding-top: 200px;
+  }
+  
+  .intro-cta {
+    padding-bottom: 240px;
+  }
+
+}
+
+@media (max-height: 800px) {
+
+  .intro-text {
+    max-width: 650px;
+    padding-top: 80px;
+  }
+  
+  .intro-cta {
+    padding-bottom: 120px;
+  }
+
+  .intro {
+    font-size: 22px;
   }
 
 }
