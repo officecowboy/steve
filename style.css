@@ -136,7 +136,7 @@ img {
 }
 
 .intro-text {
-  max-width: 650px;
+  max-width: 450px;
   padding-top: 280px;
 }
 
@@ -221,7 +221,6 @@ img {
 @media (max-height: 800px) {
 
   .intro-text {
-    max-width: 650px;
     padding-top: 80px;
   }
   
