@@ -76,7 +76,7 @@ function resetGame() {
 function newGame() {
   startButton.style.display = 'none'
   footer.style.display = 'initial'
-  title.innerHTML = 'Wait'
+  title.innerHTML = 'Watch'
 }
 
 function clearNotifications() {
@@ -116,7 +116,7 @@ function steveRound() {
 
   console.log(arr)
 
-  title.innerHTML = 'Wait'
+  title.innerHTML = 'Watch'
 
   for (let i = 0; i < arr.length; i++) {
     setTimeout(() => {
@@ -156,7 +156,7 @@ function nextRound() {
   steveRound()
   setTimeout(() => {
     clearNotifications()
-    title.innerHTML = 'Go'
+    title.innerHTML = 'Repeat'
     appContainer.classList.remove('blocked')
   }, score * 800 + 1000)
 
