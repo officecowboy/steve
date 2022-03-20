@@ -9,8 +9,8 @@ const biteShort = document.querySelector('#biteshort')
 const intro = document.querySelector('.intro')
 const container = document.querySelector('.container')
 
-const fullWhiteApple = document.querySelector(".fullwhiteapple")
-const halfWhiteApple = document.querySelector(".halfwhiteapple")
+const fullApple = document.querySelector(".fullapple")
+const halfApple = document.querySelector(".halfapple")
 
 
 let circles = document.querySelectorAll('.circle')
@@ -21,11 +21,11 @@ let userArr = []
 
 scoreTally.innerHTML = score
 
-fullWhiteApple.addEventListener("click", function () {
-  fullWhiteApple.classList.add('hidden')
-  halfWhiteApple.classList.remove('hidden')
+fullApple.addEventListener("click", function () {
+  fullApple.classList.add('hidden')
+  halfApple.classList.remove('hidden')
   bite.play()
-  setTimeout(() => { halfWhiteApple.classList.add('fullzoom') }, 1000)
+  setTimeout(() => { halfApple.classList.add('fullzoom') }, 1000)
   setTimeout(() => { container.classList.remove('hidden') }, 1200)
   setTimeout(() => { intro.style.display = 'none' }, 1500)
   setTimeout(() => {
