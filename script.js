@@ -4,6 +4,15 @@ const startButton = document.querySelector('.start')
 const title = document.querySelector('.title')
 const footer = document.querySelector('.score')
 const gameOver = document.querySelector('#gameover')
+const bite = document.querySelector('#bite')
+const biteShort = document.querySelector('#biteshort')
+const intro = document.querySelector('.intro')
+const container = document.querySelector('.container')
+
+const fullWhiteApple = document.querySelector(".fullwhiteapple")
+const halfWhiteApple = document.querySelector(".halfwhiteapple")
+
+
 let circles = document.querySelectorAll('.circle')
 let scoreTally = document.querySelector('.score-tally')
 let score = 0
@@ -12,11 +21,27 @@ let userArr = []
 
 scoreTally.innerHTML = score
 
+fullWhiteApple.addEventListener("click", function () {
+  fullWhiteApple.classList.add('hidden')
+  halfWhiteApple.classList.remove('hidden')
+  bite.play()
+  setTimeout(() => { halfWhiteApple.classList.add('fullzoom') }, 1000)
+  setTimeout(() => { container.classList.remove('hidden') }, 1200)
+  setTimeout(() => { intro.style.display = 'none' }, 1500)
+  setTimeout(() => {
+    appContainer.classList.remove('blocked')
+    newGame()
+  }, 1400)
+  setTimeout(() => {
+    nextRound()
+  }, 1800)
+})
 
 startButton.addEventListener("click", function () {
   appContainer.classList.remove('blocked')
   newGame()
   nextRound()
+  biteShort.play()
 })
 
 for (let i = 0; i < app.length; i++) {
@@ -96,7 +121,7 @@ function steveRound() {
   for (let i = 0; i < arr.length; i++) {
     setTimeout(() => {
       selectApp(arr[i])
-    }, 1000 * (i + 1));
+    }, 800 * (i + 1));
   }
 
 }
@@ -133,7 +158,7 @@ function nextRound() {
     clearNotifications()
     title.innerHTML = 'Go'
     appContainer.classList.remove('blocked')
-  }, score * 1000 + 1000)
+  }, score * 800 + 1000)
 
 }
 
