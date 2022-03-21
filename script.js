@@ -8,10 +8,8 @@ const bite = document.querySelector('#bite')
 const biteShort = document.querySelector('#biteshort')
 const intro = document.querySelector('.intro')
 const container = document.querySelector('.container')
-
 const fullApple = document.querySelector(".fullapple")
 const halfApple = document.querySelector(".halfapple")
-
 
 let circles = document.querySelectorAll('.circle')
 let scoreTally = document.querySelector('.score-tally')
