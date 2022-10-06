@@ -55,7 +55,6 @@ for (let i = 0; i < app.length; i++) {
 
 function resetGame() {
 
-  score = 0
   arr = []
   userArr = []
 
@@ -66,12 +65,13 @@ function resetGame() {
   }
 
   startButton.style.display = 'initial'
-  title.innerHTML = 'Game Over'
+  title.innerHTML = `You reached Level ${score}!`
   gameOver.play()
   footer.style.display = 'none'
 }
 
 function newGame() {
+  score = 0
   startButton.style.display = 'none'
   footer.style.display = 'initial'
   title.innerHTML = 'Watch'
