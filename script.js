@@ -66,6 +66,7 @@ function resetGame() {
 
   startButton.style.display = 'initial'
   title.innerHTML = `You reached Level ${score}!`
+  appContainer.classList.add('blocked')
   gameOver.play()
   footer.style.display = 'none'
 }
